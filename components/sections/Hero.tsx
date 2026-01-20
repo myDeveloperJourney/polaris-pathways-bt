@@ -59,7 +59,7 @@ export default function Hero() {
 
           {/* Subheadline - SHORTENED per client feedback */}
           <p className="text-base md:text-lg text-white/75 mb-8 max-w-xl leading-relaxed">
-            Helping ABA clinics build stable teams—and BCBAs and RBTs find careers where they thrive.
+            Helping ABA clinics build stable teams and BCBAs and RBTs find careers where they thrive.
           </p>
 
           {/* CTAs */}
