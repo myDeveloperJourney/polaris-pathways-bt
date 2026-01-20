@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function AboutSection() {
   return (
     <section id="about" className="section-padding bg-white">
@@ -28,13 +30,15 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Right Image */}
+          {/* Right Image - ABA Therapy specific */}
           <div className="relative">
             <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
-                alt="Our team collaborating"
-                className="w-full h-full object-cover"
+              <Image
+                src="/images/about-aba-therapy.jpg"
+                alt="BCBA working with a child during an ABA therapy session"
+                fill
+                className="object-cover"
+                quality={85}
               />
             </div>
             {/* Decorative element */}
