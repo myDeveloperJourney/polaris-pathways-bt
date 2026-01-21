@@ -40,7 +40,7 @@ export default function WhatSetsUsApart() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop')`
+          backgroundImage: `url('/images/what-makes-us-different-background.jpg')`,
         }}
       />
       <div className="absolute inset-0 bg-white/90" />
