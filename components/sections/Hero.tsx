@@ -4,39 +4,40 @@ import Image from 'next/image'
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image - The Guided Hand */}
+      {/* Background Image - Path to the North Star */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-guided-hand.jpg"
-          alt="Therapist gently guiding a child's hand - ABA therapy in action"
+          src="/images/hero-woman-with-child.jpg"
+          alt="Adult and child sitting together, looking at a starry sky with a bright North Star guiding the way - metaphor for Polaris Pathways guiding ABA careers"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-[25%_60%] md:object-[50%_50%]"
           quality={90}
         />
 
-        {/* Dark gradient overlay - darker on left for text, lighter on right for image */}
+        {/* Dark gradient overlay - ensures text readability while preserving the star and figures */}
         <div
           className="absolute inset-0 z-[1]"
           style={{
             background: `linear-gradient(
               to right,
-              rgba(26, 46, 68, 0.9) 0%,
-              rgba(26, 46, 68, 0.75) 35%,
-              rgba(26, 46, 68, 0.5) 60%,
-              rgba(26, 46, 68, 0.3) 100%
+              rgba(15, 23, 42, 0.85) 0%,
+              rgba(15, 23, 42, 0.7) 40%,
+              rgba(15, 23, 42, 0.4) 70%,
+              rgba(15, 23, 42, 0.2) 100%
             )`
           }}
         />
 
-        {/* Subtle starlight/guidance glow overlay in upper right */}
+        {/* Subtle vertical gradient to darken bottom for grounding */}
         <div
           className="absolute inset-0 z-[2] pointer-events-none"
           style={{
-            background: `
-              radial-gradient(circle at 80% 25%, rgba(255, 255, 255, 0.12) 0%, transparent 40%),
-              radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 12%)
-            `
+            background: `linear-gradient(
+              to top,
+              rgba(15, 23, 42, 0.5) 0%,
+              transparent 30%
+            )`
           }}
         />
       </div>
@@ -44,22 +45,19 @@ export default function Hero() {
       {/* Content - LEFT ALIGNED */}
       <div className="relative z-10 container mx-auto px-6 lg:px-12 pt-24 pb-16">
         <div className="max-w-2xl">
-          {/* Small accent - DE-EMPHASIZED per client feedback */}
-          <div className="flex items-center gap-3 mb-4 opacity-70">
-            <div className="w-8 h-0.5 bg-orange-500" />
-            <span className="text-white/70 text-xs uppercase tracking-[0.2em]">
-              Guiding ABA Careers Forward
-            </span>
-          </div>
+          {/* Tagline - minimized per Mark's feedback */}
+          <span className="text-white/50 text-xs uppercase tracking-[0.2em] mb-6 block">
+            Guiding ABA Careers Forward
+          </span>
 
-          {/* Main Headline */}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
-            Your North Star for Pathways to Better Outcomes
+          {/* Main Headline - Option 1 */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
+            Your North Star in ABA Talent
           </h1>
 
-          {/* Subheadline - SHORTENED per client feedback */}
-          <p className="text-base md:text-lg text-white/75 mb-8 max-w-xl leading-relaxed">
-            Helping ABA clinics build stable teams and BCBAs and RBTs find careers where they thrive.
+          {/* Subheadline - single sentence, slightly reduced for image-forward feel */}
+          <p className="text-sm md:text-base text-white/70 mb-8 max-w-lg leading-relaxed">
+            Helping clinics build stable teams, and helping clinicians find roles where they thrive.
           </p>
 
           {/* CTAs */}
