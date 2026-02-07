@@ -22,7 +22,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <Star className="w-6 h-6 text-orange-500 fill-orange-500" />
+              {/* <Star className="w-6 h-6 text-orange-500 fill-orange-500" /> */}
               <span className="text-lg font-semibold uppercase tracking-wide">Polaris Pathways</span>
             </div>
             <p className="text-white/60 text-sm leading-relaxed">
