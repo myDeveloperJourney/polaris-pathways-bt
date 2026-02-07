@@ -18,7 +18,7 @@ export default function AboutSection() {
 
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                ABA work is a journey — for organizations, for professionals, and for the families they serve. Growth is rarely linear. Burnout is real. Hiring is hard. And finding the right fit can feel overwhelming on both sides.
+                ABA work is a journey, for organizations, for professionals, and for the families they serve. Growth is rarely linear. Burnout is real. Hiring is hard. And finding the right fit can feel overwhelming on both sides.
               </p>
               <p>
                 Polaris Pathways exists to bring clarity, direction, and stability to that journey. We help ABA organizations build strong, sustainable teams. We help BCBAs and RBTs find roles where they can grow, stay, and thrive.
