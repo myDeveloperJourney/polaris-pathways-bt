@@ -13,7 +13,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <Star className="w-6 h-6 text-orange-500 fill-orange-500" />
+            {/* <Star className="w-6 h-6 text-orange-500 fill-orange-500" /> */}
             <span className="text-lg font-semibold text-white uppercase tracking-wide">
               Polaris Pathways
             </span>
