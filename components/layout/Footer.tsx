@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Star, Linkedin, Instagram } from 'lucide-react'
+// import { Linkedin, Instagram } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -21,9 +21,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              {/* <Star className="w-6 h-6 text-orange-500 fill-orange-500" /> */}
-              <span className="text-lg font-semibold uppercase tracking-wide">Polaris Pathways</span>
+            <div className="flex flex-col">
+              <span className="text-lg font-semibold uppercase tracking-wide leading-tight">
+                Polaris Pathways
+              </span>
+              <span className="text-[10px] font-medium text-white/70 uppercase tracking-[0.15em] pl-2">
+                Behavioral Talent
+              </span>
             </div>
             <p className="text-white/60 text-sm leading-relaxed">
               Your North Star for Pathways to Better Outcomes. Guiding ABA clinics and professionals toward stable, growth-focused partnerships.
@@ -53,7 +57,7 @@ export default function Footer() {
               <Link href="/facilities" className="text-white/60 hover:text-orange-400 transition-colors text-sm">
                 Hire ABA Talent
               </Link>
-              <Link href="#about" className="text-white/60 hover:text-orange-400 transition-colors text-sm">
+              <Link href="#three-pillars" className="text-white/60 hover:text-orange-400 transition-colors text-sm">
                 Our Approach
               </Link>
               <Link href="/facilities" className="text-white/60 hover:text-orange-400 transition-colors text-sm">
@@ -89,9 +93,11 @@ export default function Footer() {
             </Link>
             <span className="text-white/30">|</span>
             <span className="text-white/60 text-sm">
-              Polaris Pathways © 2025
+              Polaris Pathways © {new Date().getFullYear()}
             </span>
           </div>
+          {/* 
+          Will add social media icons in the future, but for now we want to keep it simple and focused on the core content.
           <div className="flex items-center gap-4">
             <a
               href="https://linkedin.com"
@@ -109,7 +115,8 @@ export default function Footer() {
             >
               <Instagram className="w-5 h-5" />
             </a>
-          </div>
+          </div> 
+          */}
         </div>
       </div>
     </footer>

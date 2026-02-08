@@ -20,7 +20,7 @@ export default function ThreePillars() {
   ]
 
   return (
-    <section className="py-20 hero-gradient">
+    <section id="three-pillars" className="py-20 hero-gradient">
       <div className="container-custom">
         {/* Title with dotted accent */}
         <div className="text-center mb-12">
