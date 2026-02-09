@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { CheckCircle, Users, Building2, ArrowRight, Home } from 'lucide-react'
+import { CheckCircle, Users, Building2, Home } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
@@ -28,10 +28,7 @@ function SuccessContent() {
           'We\'ll match you with opportunities that fit your values, lifestyle, and growth goals',
           'Begin your pathway to a career where you can grow, stay, and thrive'
         ],
-        cta: {
-          primary: { text: 'Return Home', href: '/', icon: Home },
-          secondary: null
-        }
+        cta: { text: 'Return Home', href: '/', icon: Home }
       }
     } else if (isFacilityRequest) {
       return {
@@ -44,10 +41,7 @@ function SuccessContent() {
           'Receive profiles of clinically vetted, culture-fit BCBAs and RBTs',
           'Build a stable team focused on better outcomes'
         ],
-        cta: {
-          primary: { text: 'Return Home', href: '/', icon: Home },
-          secondary: null
-        }
+        cta: { text: 'Return Home', href: '/', icon: Home }
       }
     } else {
       return {
@@ -58,10 +52,7 @@ function SuccessContent() {
           'We\'ll review your submission and get back to you soon',
           'Check your email for confirmation and next steps'
         ],
-        cta: {
-          primary: { text: 'Return Home', href: '/', icon: Home },
-          secondary: null
-        }
+        cta: { text: 'Return Home', href: '/', icon: Home }
       }
     }
   }
@@ -119,22 +110,14 @@ function SuccessContent() {
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button asChild size="lg" className="flex-1">
-                    <Link href={content.cta.primary.href} className="flex items-center justify-center">
-                      <content.cta.primary.icon className="w-5 h-5 mr-2" />
-                      {content.cta.primary.text}
+                {/* Action Button */}
+                <div className="pt-4">
+                  <Button asChild size="lg" className="w-full sm:w-auto">
+                    <Link href={content.cta.href} className="flex items-center justify-center">
+                      <content.cta.icon className="w-5 h-5 mr-2" />
+                      {content.cta.text}
                     </Link>
                   </Button>
-                  {content.cta.secondary && (
-                    <Button variant="outline" asChild size="lg" className="flex-1">
-                      <Link href={content.cta.secondary.href} className="flex items-center justify-center">
-                        <content.cta.secondary.icon className="w-5 h-5 mr-2" />
-                        {content.cta.secondary.text}
-                      </Link>
-                    </Button>
-                  )}
                 </div>
               </CardContent>
             </Card>
