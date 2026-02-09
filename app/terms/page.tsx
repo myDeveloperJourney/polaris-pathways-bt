@@ -138,9 +138,7 @@ export default function TermsOfServicePage() {
                   </p>
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <p className="text-gray-700">
-                      <strong>Email:</strong> legal@allstaffhealth.com<br />
-                      <strong>Phone:</strong> (800) 555-0123<br />
-                      <strong>Address:</strong> 123 Healthcare Way, Suite 100, Medical City, MC 12345
+                      <strong>Email:</strong> contact@polarispathbt.com
                     </p>
                   </div>
                 </section>

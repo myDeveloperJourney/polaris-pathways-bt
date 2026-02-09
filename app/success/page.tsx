@@ -29,8 +29,8 @@ function SuccessContent() {
           'Begin your pathway to a career where you can grow, stay, and thrive'
         ],
         cta: {
-          primary: { text: 'View ABA Opportunities', href: '#', icon: ArrowRight },
-          secondary: { text: 'Return Home', href: '/', icon: Home }
+          primary: { text: 'Return Home', href: '/', icon: Home },
+          secondary: null
         }
       }
     } else if (isFacilityRequest) {
@@ -45,8 +45,8 @@ function SuccessContent() {
           'Build a stable team focused on better outcomes'
         ],
         cta: {
-          primary: { text: 'Submit Another Request', href: '/facilities', icon: Building2 },
-          secondary: { text: 'Return Home', href: '/', icon: Home }
+          primary: { text: 'Return Home', href: '/', icon: Home },
+          secondary: null
         }
       }
     } else {
@@ -60,7 +60,7 @@ function SuccessContent() {
         ],
         cta: {
           primary: { text: 'Return Home', href: '/', icon: Home },
-          secondary: { text: 'Contact Us', href: '#', icon: ArrowRight }
+          secondary: null
         }
       }
     }
@@ -111,13 +111,11 @@ function SuccessContent() {
                   <p className="text-gray-600 mb-4">
                     Our team is here to guide you through the next steps.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 text-sm">
-                    <div>
-                      <span className="font-medium text-gray-900">Email:</span>{' '}
-                      <a href="mailto:hello@polarispathways.com" className="text-primary-600 hover:underline">
-                        hello@polarispathways.com
-                      </a>
-                    </div>
+                  <div className="text-sm text-center">
+                    <span className="font-medium text-gray-900">Email:</span>{' '}
+                    <a href="mailto:hello@polarispathbt.com" className="text-primary-600 hover:underline">
+                      hello@polarispathbt.com
+                    </a>
                   </div>
                 </div>
 
@@ -129,12 +127,14 @@ function SuccessContent() {
                       {content.cta.primary.text}
                     </Link>
                   </Button>
-                  <Button variant="outline" asChild size="lg" className="flex-1">
-                    <Link href={content.cta.secondary.href} className="flex items-center justify-center">
-                      <content.cta.secondary.icon className="w-5 h-5 mr-2" />
-                      {content.cta.secondary.text}
-                    </Link>
-                  </Button>
+                  {content.cta.secondary && (
+                    <Button variant="outline" asChild size="lg" className="flex-1">
+                      <Link href={content.cta.secondary.href} className="flex items-center justify-center">
+                        <content.cta.secondary.icon className="w-5 h-5 mr-2" />
+                        {content.cta.secondary.text}
+                      </Link>
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>

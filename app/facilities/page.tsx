@@ -25,10 +25,13 @@ export default function FacilityRequest() {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors }
   } = useForm<FacilityRequest>({
     resolver: zodResolver(facilityRequestSchema)
   })
+
+  const watchedConsent = watch('consent') || false
 
   const onSubmit = async (data: FacilityRequest) => {
     setIsSubmitting(true)
@@ -316,7 +319,8 @@ export default function FacilityRequest() {
                     <div className="flex items-start space-x-2">
                       <Checkbox
                         id="consent"
-                        {...register('consent')}
+                        checked={watchedConsent}
+                        onCheckedChange={(checked) => setValue('consent', checked as boolean)}
                         className={errors.consent ? 'border-red-500' : ''}
                       />
                       <Label htmlFor="consent" className="text-sm leading-relaxed">

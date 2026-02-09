@@ -43,14 +43,29 @@ export default function ClinicianApplication() {
 
   const onSubmit = async (data: ClinicianApplication) => {
     setIsSubmitting(true)
-    
+
     try {
+      const formData = new FormData()
+      formData.append('firstName', data.firstName)
+      formData.append('lastName', data.lastName)
+      formData.append('email', data.email)
+      formData.append('phone', data.phone)
+      formData.append('city', data.city)
+      formData.append('state', data.state)
+      formData.append('specialty', data.specialty)
+      formData.append('yearsExperience', data.yearsExperience)
+      formData.append('shiftPreferences', JSON.stringify(data.shiftPreferences))
+      formData.append('consent', String(data.consent))
+
+      // Append resume file if selected
+      const fileInput = document.querySelector<HTMLInputElement>('input[type="file"]')
+      if (fileInput?.files?.[0]) {
+        formData.append('resume', fileInput.files[0])
+      }
+
       const response = await fetch('/api/apply', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        body: formData,
       })
 
       if (response.ok) {

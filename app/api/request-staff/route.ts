@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { facilityRequestSchema } from '@/lib/validations/forms'
+import { appendFacilityRequest } from '@/lib/google-sheets'
 
 export async function POST(request: NextRequest) {
   try {
@@ -31,6 +32,9 @@ export async function POST(request: NextRequest) {
       location: `${validatedData.city}, ${validatedData.state}`
     })
 
+    // Save to Google Sheets
+    await appendFacilityRequest(validatedData)
+
     // TODO: Integrate with CRM (e.g., HubSpot, Salesforce)
     // const crmResponse = await submitToCRM({
     //   endpoint: process.env.CRM_API_URL,
@@ -60,9 +64,6 @@ export async function POST(request: NextRequest) {
     //   value: estimateContractValue(validatedData),
     //   stage: 'new_inquiry'
     // })
-
-    // Simulate processing delay (remove in production)
-    await new Promise(resolve => setTimeout(resolve, 1000))
 
     return NextResponse.json({ 
       success: true, 
