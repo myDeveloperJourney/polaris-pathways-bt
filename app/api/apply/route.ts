@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { clinicianApplicationSchema } from '@/lib/validations/forms'
+import { appendClinicianApplication } from '@/lib/google-sheets'
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,6 +29,9 @@ export async function POST(request: NextRequest) {
       specialty: validatedData.specialty,
       location: `${validatedData.city}, ${validatedData.state}`
     })
+
+    // Save to Google Sheets
+    await appendClinicianApplication(validatedData)
 
     // TODO: Integrate with ATS (e.g., RecruiterFlow)
     // const atsResponse = await submitToATS({

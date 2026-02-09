@@ -31,6 +31,7 @@ export default function ClinicianApplication() {
   })
 
   const watchedShiftPreferences = watch('shiftPreferences') || []
+  const watchedConsent = watch('consent') || false
 
   const handleShiftPreferenceChange = (shift: string, checked: boolean) => {
     if (checked) {
@@ -314,7 +315,8 @@ export default function ClinicianApplication() {
                     <div className="flex items-start space-x-2">
                       <Checkbox
                         id="consent"
-                        {...register('consent')}
+                        checked={watchedConsent}
+                        onCheckedChange={(checked) => setValue('consent', checked as boolean)}
                         className={errors.consent ? 'border-red-500' : ''}
                       />
                       <Label htmlFor="consent" className="text-sm leading-relaxed">
