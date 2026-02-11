@@ -96,20 +96,6 @@ function SuccessContent() {
                   </div>
                 </div>
 
-                {/* Contact Information */}
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h4 className="font-semibold text-gray-900 mb-2">Need immediate assistance?</h4>
-                  <p className="text-gray-600 mb-4">
-                    Our team is here to guide you through the next steps.
-                  </p>
-                  <div className="text-sm text-center">
-                    <span className="font-medium text-gray-900">Email:</span>{' '}
-                    <a href="mailto:hello@polarispathbt.com" className="text-primary-600 hover:underline">
-                      hello@polarispathbt.com
-                    </a>
-                  </div>
-                </div>
-
                 {/* Action Button */}
                 <div className="pt-4">
                   <Button asChild size="lg" className="w-full sm:w-auto">
