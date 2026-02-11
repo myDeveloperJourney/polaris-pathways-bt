@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { clinicianApplicationSchema } from '@/lib/validations/forms'
 import { appendClinicianApplication } from '@/lib/google-sheets'
-import { uploadResumeToDrive } from '@/lib/google-drive'
+import { uploadResume } from '@/lib/blob-storage'
 
 export async function POST(request: NextRequest) {
   try {
@@ -46,23 +46,23 @@ export async function POST(request: NextRequest) {
       location: `${validatedData.city}, ${validatedData.state}`
     })
 
-    // Save to Google Sheets
-    await appendClinicianApplication(validatedData)
-
-    // Upload resume to Google Drive if provided
+    // Upload resume to Vercel Blob if provided
     let resumeLink: string | undefined
     const resumeFile = formData.get('resume') as File | null
     if (resumeFile && resumeFile.size > 0) {
       const buffer = Buffer.from(await resumeFile.arrayBuffer())
       const candidateName = `${validatedData.firstName} ${validatedData.lastName}`
-      resumeLink = await uploadResumeToDrive(
+      resumeLink = await uploadResume(
         buffer,
         resumeFile.name,
         resumeFile.type,
         candidateName
       )
-      console.log('Resume uploaded to Google Drive:', resumeLink)
+      console.log('Resume uploaded:', resumeLink)
     }
+
+    // Save to Google Sheets (includes resume URL if uploaded)
+    await appendClinicianApplication(validatedData, resumeLink)
 
     // TODO: Integrate with ATS (e.g., RecruiterFlow)
     // const atsResponse = await submitToATS({
@@ -84,10 +84,7 @@ export async function POST(request: NextRequest) {
     //   data: validatedData
     // })
 
-    // Simulate processing delay (remove in production)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-
-    return NextResponse.json({ 
+    return NextResponse.json({
       success: true, 
       message: 'Application submitted successfully',
       applicationId: `APP-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`

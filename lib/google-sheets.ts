@@ -21,7 +21,7 @@ async function initializeDoc(sheetId: string) {
 /**
  * Append a clinician application to the Google Sheet
  */
-export async function appendClinicianApplication(data: ClinicianApplication) {
+export async function appendClinicianApplication(data: ClinicianApplication, resumeUrl?: string) {
   try {
     const sheetId = process.env.GOOGLE_SHEET_ID_CLINICIANS
 
@@ -46,7 +46,7 @@ export async function appendClinicianApplication(data: ClinicianApplication) {
       'Shift Preferences': Array.isArray(data.shiftPreferences)
         ? data.shiftPreferences.join(', ')
         : data.shiftPreferences,
-      'Resume Uploaded': data.resume ? 'Yes' : 'No',
+      'Resume Link': resumeUrl || 'Not provided',
       Consent: data.consent ? 'Yes' : 'No',
     })
 

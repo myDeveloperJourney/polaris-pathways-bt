@@ -22,8 +22,6 @@ async function findOrCreateFolder(
   const existing = await drive.files.list({
     q: `'${parentFolderId}' in parents and name = '${folderName}' and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
     fields: 'files(id)',
-    includeItemsFromAllDrives: true,
-    supportsAllDrives: true,
   })
 
   if (existing.data.files && existing.data.files.length > 0) {
@@ -38,7 +36,6 @@ async function findOrCreateFolder(
       parents: [parentFolderId],
     },
     fields: 'id',
-    supportsAllDrives: true,
   })
 
   return folder.data.id!
@@ -82,7 +79,6 @@ export async function uploadResumeToDrive(
       body: stream,
     },
     fields: 'id, webViewLink',
-    supportsAllDrives: true,
   })
 
   return uploaded.data.webViewLink || uploaded.data.id!

@@ -65,17 +65,21 @@ A modern healthcare staffing platform built with Next.js 14+ that connects quali
    ```bash
    cp .env.example .env.local
    ```
-   Edit `.env.local` with your configuration:
+   Edit `.env.local` with your configuration (see [Google Integrations Setup](#-google-integrations-setup) below for details):
    ```env
-   # Analytics
-   NEXT_PUBLIC_GA_ID=your-google-analytics-id
-   
-   # External Integrations (Coming Soon)
-   RECRUITERFLOW_API_KEY=your-recruiterflow-api-key
-   SALESFORCE_API_KEY=your-salesforce-api-key
-   
-   # Email Service (Coming Soon)
-   SENDGRID_API_KEY=your-sendgrid-api-key
+   # Google Service Account
+   GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@your-project.iam.gserviceaccount.com
+   GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+
+   # Google Sheets
+   GOOGLE_SHEET_ID_CLINICIANS=your-clinician-sheet-id
+   GOOGLE_SHEET_ID_FACILITIES=your-facility-sheet-id
+
+   # Vercel Blob (for resume uploads)
+   BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
+
+   # Google Analytics (optional)
+   # NEXT_PUBLIC_GA_ID=your-ga-tracking-id
    ```
 
 4. **Run the development server**
@@ -107,8 +111,10 @@ allstaff-demo/
 │   ├── layout/           # Layout components (Header, Footer)
 │   ├── sections/         # Homepage sections
 │   └── ui/               # shadcn/ui components
-├── lib/                  # Utilities and schemas
-│   ├── schemas.ts        # Zod validation schemas
+├── lib/                  # Utilities and integrations
+│   ├── validations/      # Zod validation schemas
+│   ├── google-sheets.ts  # Google Sheets integration
+│   ├── blob-storage.ts   # Vercel Blob resume uploads
 │   └── utils.ts          # Utility functions
 ├── docs/                 # Documentation
 │   └── research.md       # Industry research and design decisions
@@ -179,24 +185,99 @@ The application can be deployed to any platform supporting Next.js:
 - **Railway**: Direct deployment from GitHub
 - **DigitalOcean App Platform**: Configure via UI
 
-## 🔧 Configuration
+## 🔧 Google Integrations Setup
 
-### Environment Variables
+Both forms (clinician applications and facility staffing requests) save submissions to Google Sheets. Clinician resumes are uploaded to Google Drive. All of this is powered by a single Google Cloud service account.
 
-Create `.env.local` based on `.env.example`:
+### Step 1: Create a Google Cloud Project and Service Account
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/) and create a new project (or use an existing one).
+2. Enable the following APIs for the project:
+   - **Google Sheets API**
+   - **Google Drive API**
+3. Go to **IAM & Admin > Service Accounts** and create a new service account.
+4. On the service account detail page, go to the **Keys** tab and click **Add Key > Create new key > JSON**.
+5. Download the JSON key file. You will need two values from it:
+   - `client_email` — this is your `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+   - `private_key` — this is your `GOOGLE_PRIVATE_KEY`
+
+### Step 2: Create the Clinician Applications Spreadsheet
+
+1. Create a new Google Spreadsheet (e.g., "Clinician Applications").
+2. In the **first row** of Sheet1, add these exact column headers:
+
+   | Timestamp | First Name | Last Name | Email | Phone | City | State | Specialty | Years Experience | Shift Preferences | Resume Link | Consent |
+   |-----------|-----------|----------|-------|-------|------|-------|-----------|-----------------|-------------------|-------------|---------|
+
+3. Share the spreadsheet with your service account email (the `client_email` from the JSON key) and give it **Editor** access.
+4. Copy the spreadsheet ID from the URL — it's the long string between `/d/` and `/edit`:
+   ```
+   https://docs.google.com/spreadsheets/d/THIS_IS_THE_SHEET_ID/edit
+   ```
+   This is your `GOOGLE_SHEET_ID_CLINICIANS`.
+
+### Step 3: Create the Facility Requests Spreadsheet
+
+1. Create another Google Spreadsheet (e.g., "Facility Requests").
+2. In the **first row** of Sheet1, add these exact column headers:
+
+   | Timestamp | Contact Name | Work Email | Phone | Organization Name | City | State | Role Needed | Number of Openings | Shift Type | Start Date | Contract Length | Budget Range | Notes | Consent |
+   |-----------|-------------|-----------|-------|-------------------|------|-------|-------------|-------------------|-----------|-----------|----------------|-------------|-------|---------|
+
+3. Share the spreadsheet with your service account email and give it **Editor** access.
+4. Copy the spreadsheet ID from the URL. This is your `GOOGLE_SHEET_ID_FACILITIES`.
+
+### Step 4: Set Up Vercel Blob for Resume Uploads
+
+Resumes are stored using [Vercel Blob](https://vercel.com/docs/storage/vercel-blob), which provides a public URL for each file. The URL is saved in the Google Sheet so you can click through to view/download any resume.
+
+1. In the [Vercel Dashboard](https://vercel.com/dashboard), go to your project's **Storage** tab.
+2. Click **Create Database** and select **Blob**.
+3. Once created, go to the Blob store settings and copy the **Read/Write Token**.
+4. Add it to your `.env.local` as `BLOB_READ_WRITE_TOKEN`.
+
+Resumes are stored under `candidates/{Candidate Name}/{filename}` and the public URL is saved in the "Resume Link" column of the clinician spreadsheet.
+
+> **Note:** Vercel Blob's free tier includes 256MB of storage (~1,200-5,000 resumes). Beyond that it's $0.023/GB/month.
+
+### Step 5: Configure Environment Variables
+
+Create a `.env.local` file in the project root with the following:
 
 ```env
-# Required for production
-NEXT_PUBLIC_GA_ID=your-google-analytics-id
+# Google Service Account credentials (from the JSON key file)
+GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@your-project.iam.gserviceaccount.com
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
 
-# Optional integrations
-RECRUITERFLOW_API_KEY=your-recruiterflow-api-key
-SALESFORCE_API_KEY=your-salesforce-api-key
-SENDGRID_API_KEY=your-sendgrid-api-key
+# Google Sheet IDs (from each spreadsheet URL)
+GOOGLE_SHEET_ID_CLINICIANS=your-clinician-spreadsheet-id
+GOOGLE_SHEET_ID_FACILITIES=your-facility-spreadsheet-id
 
-# Development only
-NODE_ENV=development
+# Vercel Blob token (from Vercel Dashboard > Storage > Blob)
+BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
+
+# Google Analytics (optional)
+# NEXT_PUBLIC_GA_ID=your-ga-tracking-id
 ```
+
+> **Important:** When copying `GOOGLE_PRIVATE_KEY`, wrap the entire value in double quotes and keep the `\n` newline characters as-is. Do not replace them with actual line breaks.
+
+### Environment Variables Reference
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | Yes | Service account email (`client_email` from JSON key) |
+| `GOOGLE_PRIVATE_KEY` | Yes | Service account private key (`private_key` from JSON key) |
+| `GOOGLE_SHEET_ID_CLINICIANS` | Yes | Spreadsheet ID for clinician applications |
+| `GOOGLE_SHEET_ID_FACILITIES` | Yes | Spreadsheet ID for facility staffing requests |
+| `BLOB_READ_WRITE_TOKEN` | Yes | Vercel Blob read/write token for resume uploads |
+| `NEXT_PUBLIC_GA_ID` | No | Google Analytics measurement ID |
+
+### Vercel Deployment
+
+When deploying to Vercel, add all environment variables in **Settings > Environment Variables**. For `GOOGLE_PRIVATE_KEY`, paste the raw key value including the `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----` markers. The `BLOB_READ_WRITE_TOKEN` is automatically available if you created the Blob store through the Vercel dashboard for this project.
+
+## 🔧 Configuration
 
 ### Tailwind Configuration
 
