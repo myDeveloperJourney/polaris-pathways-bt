@@ -1,6 +1,12 @@
+import type { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description: 'Learn how Polaris Pathways Behavioral Talent collects, uses, and protects your personal information.',
+}
 
 export default function PrivacyPolicyPage() {
   return (

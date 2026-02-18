@@ -1,6 +1,12 @@
+import type { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+
+export const metadata: Metadata = {
+  title: 'Terms of Service',
+  description: 'Review the terms of service for Polaris Pathways Behavioral Talent, an ABA staffing platform connecting BCBAs, RBTs, and behavioral health facilities.',
+}
 
 export default function TermsOfServicePage() {
   return (
