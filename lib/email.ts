@@ -85,7 +85,7 @@ export async function sendClinicianApplicationNotification(
 
   try {
     const result = await getResendClient().emails.send({
-      from: 'Polaris Pathways <onboarding@resend.dev>',
+      from: 'Polaris Pathways <notifications@polarispathbt.com>',
       to: recipientEmail,
       subject: 'New Clinician Application - Polaris Pathways',
       html: `
@@ -325,7 +325,7 @@ export async function sendFacilityRequestNotification(data: FacilityRequest) {
 
   try {
     const result = await getResendClient().emails.send({
-      from: 'Polaris Pathways <onboarding@resend.dev>',
+      from: 'Polaris Pathways <notifications@polarispathbt.com>',
       to: recipientEmail,
       subject: `New Staffing Request from ${data.organizationName} - Polaris Pathways`,
       html: `
