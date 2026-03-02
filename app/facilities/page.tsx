@@ -58,13 +58,11 @@ export default function FacilityRequest() {
     }
   }
 
-  const contractLengths = [
-    '1-4 weeks',
-    '1-3 months',
-    '3-6 months',
-    '6-12 months',
-    'Permanent placement',
-    'Ongoing/PRN'
+  const hireTypes = [
+    'Direct Hire',
+    'Contract',
+    'Temp-to-Perm',
+    'Not Sure Yet'
   ]
 
   const shiftTypes = [
@@ -255,15 +253,15 @@ export default function FacilityRequest() {
                       </div>
                       
                       <div>
-                        <Label htmlFor="contractLength">Contract Length *</Label>
+                        <Label htmlFor="contractLength">Direct Hire or Contract *</Label>
                         <Select onValueChange={(value) => setValue('contractLength', value)}>
                           <SelectTrigger className={errors.contractLength ? 'border-red-500' : ''}>
-                            <SelectValue placeholder="Select contract length" />
+                            <SelectValue placeholder="Select hire type" />
                           </SelectTrigger>
                           <SelectContent>
-                            {contractLengths.map((length) => (
-                              <SelectItem key={length} value={length}>
-                                {length}
+                            {hireTypes.map((type) => (
+                              <SelectItem key={type} value={type}>
+                                {type}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -274,28 +272,17 @@ export default function FacilityRequest() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="startDate">Approximate Start Date *</Label>
-                        <Input
-                          id="startDate"
-                          type="date"
-                          {...register('startDate')}
-                          className={errors.startDate ? 'border-red-500' : ''}
-                        />
-                        {errors.startDate && (
-                          <p className="text-sm text-red-600 mt-1">{errors.startDate.message}</p>
-                        )}
-                      </div>
-                      
-                      <div>
-                        <Label htmlFor="budgetRange">Budget/Rate Range (Optional)</Label>
-                        <Input
-                          id="budgetRange"
-                          placeholder="e.g., $40-50/hour"
-                          {...register('budgetRange')}
-                        />
-                      </div>
+                    <div>
+                      <Label htmlFor="startDate">Approximate Start Date *</Label>
+                      <Input
+                        id="startDate"
+                        type="date"
+                        {...register('startDate')}
+                        className={errors.startDate ? 'border-red-500' : ''}
+                      />
+                      {errors.startDate && (
+                        <p className="text-sm text-red-600 mt-1">{errors.startDate.message}</p>
+                      )}
                     </div>
                   </div>
 

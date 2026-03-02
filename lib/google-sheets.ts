@@ -84,8 +84,7 @@ export async function appendFacilityRequest(data: FacilityRequest) {
       'Number of Openings': data.numberOfOpenings,
       'Shift Type': data.shiftType,
       'Start Date': data.startDate,
-      'Contract Length': data.contractLength,
-      'Budget Range': data.budgetRange || 'Not specified',
+      'Direct Hire or Contract': data.contractLength,
       Notes: data.notes || 'None',
       Consent: data.consent ? 'Yes' : 'No',
     })

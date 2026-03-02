@@ -310,18 +310,8 @@ export async function sendFacilityRequestNotification(data: FacilityRequest) {
     'flexible': 'Flexible',
   }
 
-  const contractLabels: Record<string, string> = {
-    '3-months': '3 Months',
-    '6-months': '6 Months',
-    '12-months': '12 Months',
-    'permanent': 'Permanent / Direct Hire',
-    'temp-to-perm': 'Temp-to-Perm',
-    'other': 'Other',
-  }
-
   const roleDisplay = roleLabels[data.roleNeeded] || data.roleNeeded
   const shiftDisplay = shiftLabels[data.shiftType] || data.shiftType
-  const contractDisplay = contractLabels[data.contractLength] || data.contractLength
 
   try {
     const result = await getResendClient().emails.send({
@@ -478,20 +468,14 @@ export async function sendFacilityRequestNotification(data: FacilityRequest) {
               </div>
 
               <div class="field">
-                <div class="label">Contract Length</div>
-                <div class="value">${contractDisplay}</div>
+                <div class="label">Direct Hire or Contract</div>
+                <div class="value">${data.contractLength}</div>
               </div>
 
               <div class="field">
                 <div class="label">Approximate Start Date</div>
                 <div class="value">${data.startDate}</div>
               </div>
-
-              ${data.budgetRange ? `
-              <div class="field">
-                <div class="label">Budget / Rate Range</div>
-                <div class="value">${data.budgetRange}</div>
-              </div>` : ''}
 
               ${data.notes ? `
               <div class="field">
