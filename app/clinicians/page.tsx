@@ -335,7 +335,7 @@ export default function ClinicianApplication() {
                         className={errors.consent ? 'border-red-500' : ''}
                       />
                       <Label htmlFor="consent" className="text-sm leading-relaxed">
-                        I agree to Polaris Pathways Behavioral Talent's{' '}
+                        I agree to Polaris Pathways Behavioral Talent&apos;s{' '}
                         <Link href="/terms" className="text-primary-600 hover:underline">
                           Terms of Service
                         </Link>{' '}

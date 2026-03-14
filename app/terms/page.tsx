@@ -30,7 +30,7 @@ export default function TermsOfServicePage() {
                 <section className="mb-8">
                   <h2 className="text-xl font-semibold text-gray-900 mb-4">Acceptance of Terms</h2>
                   <p className="text-gray-700 mb-4">
-                    By accessing and using Polaris Pathways Behavioral Talent's platform, you accept and agree to be bound by the terms and provision of this agreement. These Terms of Service govern your use of our ABA staffing services.
+                    By accessing and using Polaris Pathways Behavioral Talent&apos;s platform, you accept and agree to be bound by the terms and provision of this agreement. These Terms of Service govern your use of our ABA staffing services.
                   </p>
                 </section>
 

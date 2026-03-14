@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
                 <section className="mb-8">
                   <h2 className="text-xl font-semibold text-gray-900 mb-4">Introduction</h2>
                   <p className="text-gray-700 mb-4">
-                    Polaris Pathways Behavioral Talent ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our ABA staffing platform.
+                    Polaris Pathways Behavioral Talent (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our ABA staffing platform.
                   </p>
                 </section>
 
