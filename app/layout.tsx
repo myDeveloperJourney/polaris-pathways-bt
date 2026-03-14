@@ -106,6 +106,7 @@ export default function RootLayout({
         {children}
         <Toaster />
         <Layout />
+        <Analytics />
       </body>
     </html>
   )
