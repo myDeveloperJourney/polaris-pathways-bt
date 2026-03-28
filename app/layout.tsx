@@ -8,7 +8,7 @@ import { Layout } from 'lucide-react'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://polarispathways.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://www.polarispathbt.com'),
   title: {
     default: 'Polaris Pathways Behavioral Talent - Your North Star for ABA Staffing',
     template: '%s | Polaris Pathways',
@@ -58,7 +58,7 @@ export default function RootLayout({
               '@type': ['Organization', 'EmploymentAgency'],
               name: 'Polaris Pathways Behavioral Talent',
               description: 'Guiding ABA clinics toward stable teams and BCBAs/RBTs toward careers where they can grow, stay, and thrive.',
-              url: process.env.NEXT_PUBLIC_APP_URL || 'https://polarispathways.com',
+              url: process.env.NEXT_PUBLIC_APP_URL || 'https://www.polarispathbt.com',
               areaServed: {
                 '@type': 'Country',
                 name: 'United States',
@@ -79,7 +79,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'Polaris Pathways Behavioral Talent',
-              url: process.env.NEXT_PUBLIC_APP_URL || 'https://polarispathways.com',
+              url: process.env.NEXT_PUBLIC_APP_URL || 'https://www.polarispathbt.com',
             }),
           }}
         />
